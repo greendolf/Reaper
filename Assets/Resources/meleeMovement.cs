@@ -21,13 +21,10 @@ public class meleeMovement : MonoBehaviour
 
     public Transform player;
 
-    // Start is called before the first frame update
     void Start()
     {
         //player = GameObjectWithTag("Player").transform;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(Vector2.Distance(transform.position, point.position) < posOfPatrol && angry == false)
