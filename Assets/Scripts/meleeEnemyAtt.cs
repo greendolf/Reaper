@@ -5,7 +5,7 @@ using UnityEngine;
 public class meleeEnemyAtt : MonoBehaviour
 {
     public float timeBtAttack;
-    private player player;
+    private Player player;
     public Transform attackPos;
     public float attackRange;
     public int attackDamage;
@@ -14,7 +14,7 @@ public class meleeEnemyAtt : MonoBehaviour
     public int hp = 10;
 
     // COIN SPAWN FUNC
-
+    /*
     public int minimumCount = 3;
     public int maximumCount = 5;
     public GameObject prefab;
@@ -33,20 +33,16 @@ public class meleeEnemyAtt : MonoBehaviour
             Instantiate(prefab, transform.position, Quaternion.identity);
         }
     }
+    }*/
     // END OF COIN SPAWN FUNC
 
     private void Start()
     {
-        player = FindObjectOfType<player>();
+        player = FindObjectOfType<Player>();
 
     }
     void Update()
     {
-        if(hp <= 0)
-        {
-            Spawn();
-            Destroy(gameObject);
-        }
        /* if(timeBtAttack <= 0)
         {
             if(Input.GetMouseButton(0) && Vector2.Distance(attackPos.position, player.position) <= attackRange)

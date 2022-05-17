@@ -1,24 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class player : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    public float speed;
-    public float jumpForce;
-    private float moveInput;
+    public KeyCode left = KeyCode.A;
+    public KeyCode right = KeyCode.D;
+    public KeyCode jump = KeyCode.Space;
+
+
+    public float speed = 15;
+    public float jumpForce = 25;
+    private int extJumps;
+    public int extJumpsValue = 1;
 
     private Rigidbody2D rb;
 
     private bool facingRight = true;
 
-    public int extraJump;
-
     private bool isGrounded;
     public Transform feetPos;
-    public float checkRadius;
+    public float checkRadius = 0.2f;
     public LayerMask whatIsGround;
 
+    public int hpValue = 100;
+    public int hp;
     public int coins;
     public void AddCoins(int count)
     {
@@ -26,50 +33,96 @@ public class player : MonoBehaviour
     }
     void Start()
     {
+        hp = hpValue;
+        extJumps = extJumpsValue;
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        moveInput = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
-        if(facingRight == false && moveInput > 0)
+        LifeLogic();
+        MovementLogic();
+        JumpLogic();
+    }
+
+    //**************************************************************************************************
+
+    private void LifeLogic()
+    {
+        if (hp <= 0)
         {
             Flip();
         }
-        else if(facingRight == true && moveInput < 0)
+    }
+    private void MovementLogic()
+    {
+        if (Input.GetKey(right))
+        {
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+        }
+        else if (Input.GetKey(left))
+        {
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+
+        if (!facingRight && Input.GetKey(right))
+        {
+            Flip();
+        }
+        else if(facingRight && Input.GetKey(left))
         {
             Flip();
         }
     }
 
-    private void Update()
+    private void JumpLogic()
     {
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
-
-        /*if(isGrounded == true && Input.GetKeyDown(KeyCode.Space))
+        /*if (Physics2D.Linecast(transform.position, feetPos.position, 3 << LayerMask.NameToLayer("Ground")))
         {
-            rb.velocity = Vector2.up * jumpForce;
+            isGrounded = true;
         }*/
-
-        if (isGrounded == true)
+        if (isGrounded)
         {
-            extraJump = 1;
+            extJumps = extJumpsValue;
         }
-
-        if (Input.GetKeyDown(KeyCode.Space) && extraJump > 0)
+        if (Input.GetKeyDown(jump) && !isGrounded && (extJumps > 0))
         {
-            //Jump();
-            rb.velocity = Vector2.up * jumpForce;
-            extraJump--;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            extJumps--;
+        }
+        else if (Input.GetKeyDown(jump) && isGrounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
 
     void Flip()
     {
         facingRight = !facingRight;
-        Vector3 Scaler = transform.localScale;
+        Vector2 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+    }
+//**************************************************************************************************
+
+    /*void OnTriggerEnter2D(Collider2D collider)
+    {
+        GameObject obj = collider.gameObject;
+        if (obj.CompareTag("Enemy"))
+        {
+            int dmg = obj.GetComponent<MeleeDamage>().dmg;
+            GetDamage(dmg);
+        }
+    }*/
+
+    public void GetDamage(int value)
+    {
+        print("Damaged");
+        hp -= value;
     }
 }
