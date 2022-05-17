@@ -27,6 +27,16 @@ public class Player : MonoBehaviour
     public int hpValue = 100;
     public int hp;
     public int coins;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Coin"))
+        {
+            AddCoins(10);
+            Destroy(collision.gameObject);
+        }
+    }
+
     public void AddCoins(int count)
     {
         coins += count;

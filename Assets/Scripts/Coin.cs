@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public int count;
+    public int count = 10;
+
+    private Player player;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-            collision.GetComponent<Player>().AddCoins(count);
+            player = collision.GetComponent<Player>();
+            player.AddCoins(count);
             Destroy(gameObject);
         }
     }
