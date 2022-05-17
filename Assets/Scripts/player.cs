@@ -12,11 +12,18 @@ public class player : MonoBehaviour
 
     private bool facingRight = true;
 
+    public int extraJump;
+
     private bool isGrounded;
     public Transform feetPos;
     public float checkRadius;
     public LayerMask whatIsGround;
 
+    public int coins;
+    public void AddCoins(int count)
+    {
+        coins += count;
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,9 +47,21 @@ public class player : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
 
-        if(isGrounded == true && Input.GetKeyDown(KeyCode.Space))
+        /*if(isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = Vector2.up * jumpForce;
+        }*/
+
+        if (isGrounded == true)
+        {
+            extraJump = 1;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && extraJump > 0)
+        {
+            //Jump();
+            rb.velocity = Vector2.up * jumpForce;
+            extraJump--;
         }
     }
 
