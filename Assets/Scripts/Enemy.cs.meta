@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: eec6d97fecd45c94c88e5bdd10c1cafb
+<<<<<<<< HEAD:Assets/Scripts/Enemy.cs.meta
+guid: 7044c52d66c0b1045b1fa15df2479a7a
+========
+guid: 8d45a2197caa71b49a365659ba0659b0
+>>>>>>>> kurakin:Assets/Scripts/Coin.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

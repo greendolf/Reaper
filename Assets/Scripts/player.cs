@@ -26,6 +26,11 @@ public class Player : MonoBehaviour
 
     public int hpValue = 100;
     public int hp;
+    public int coins;
+    public void AddCoins(int count)
+    {
+        coins += count;
+    }
     void Start()
     {
         hp = hpValue;

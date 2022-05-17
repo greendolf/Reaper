@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Enemy.cs.meta
+guid: 10223162a06a9374fa742a773aa24d6a
+========
+guid: 8d45a2197caa71b49a365659ba0659b0
+>>>>>>>> kurakin:Assets/Scripts/Coin.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
