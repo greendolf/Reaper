@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -26,17 +26,10 @@ public class Player : MonoBehaviour
 
     public int hpValue = 100;
     public int hp;
+    public Text hpDisplay;
+
     public int coins;
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("Coin"))
-        {
-            AddCoins(10);
-            Destroy(collision.gameObject);
-        }
-    }
-
+    public Text coinsDisplay;
     public void AddCoins(int count)
     {
         coins += count;
@@ -48,8 +41,10 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        hpDisplay.text = hp.ToString();
+        coinsDisplay.text = coins.ToString();
         LifeLogic();
         MovementLogic();
         JumpLogic();
