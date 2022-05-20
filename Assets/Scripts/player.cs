@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+
+    // Update File title
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
     public KeyCode jump = KeyCode.Space;
