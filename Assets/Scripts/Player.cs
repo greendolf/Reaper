@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     private int souls;
     public Text soulsDisplay;
 
+    //GameObject deathScreen = GameObject.Find("DeathMenu");
     public void AddCoins(int count)
     {
         coins += count;
@@ -67,9 +68,12 @@ public class Player : MonoBehaviour
 
     private void LifeLogic()
     {
+        //deathScreen.SetActive(false);
         if (hp <= 0)
         {
-            Flip();
+            Transform deathScreen = GameObject.Find("GameOver").GetComponent<Transform>();
+            deathScreen.gameObject.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
     private void MovementLogic()
@@ -148,10 +152,10 @@ public class Player : MonoBehaviour
         hp -= value;
         //transform.position = new Vector3(10.0f, 2.0f, 0.0f);
         //rb.AddForce(direction * knockback /** -transform.localScale.x*/, ForceMode2D.Impulse);
-        Vector3 pushFrom = enemy.position;
+        /*Vector3 pushFrom = enemy.position;
         Vector3 pushDirection = (pushFrom - transform.position).normalized;
         pushDirection = new Vector3(pushDirection.x, 10f, 0f);
         // Толкаем объект в нужном направлении с силой knockback
-        rb.AddForce(pushDirection * knockback * enemy.localScale.x, ForceMode2D.Impulse);
+        rb.AddForce(pushDirection * knockback * enemy.localScale.x, ForceMode2D.Impulse);*/
     }
 }

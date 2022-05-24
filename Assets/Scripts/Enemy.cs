@@ -52,10 +52,10 @@ public class Enemy : MonoBehaviour
         //LifeLogic();
     }
 
-    /*private void FixedUpdate()
+    private void FixedUpdate()
     {
         timeBtfAttack -= Time.fixedDeltaTime;
-    }*/
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -68,20 +68,20 @@ public class Enemy : MonoBehaviour
                //playerRB.AddForce(transform.right * knockback * -transform.localScale.x, ForceMode2D.Impulse);
                timeBtfAttack = startTimeBtfAttack;
           }
-          else
+          /*else
           {
             timeBtfAttack -= Time.deltaTime;
-          }
+          }*/
     }
 
     public void GetDamage(int value)
     {
         hp -= value;
-        Vector3 pushFrom = enemy.position;
+        /*Vector3 pushFrom = enemy.position;
         Vector3 pushDirection = (pushFrom - transform.position).normalized;
         pushDirection = new Vector3(pushDirection.x, 0f, 0f);
         // Толкаем объект в нужном направлении с силой knockback
-        rb.AddForce(pushDirection * knockbackForEnemy * enemy.localScale.x, ForceMode2D.Impulse);
+        rb.AddForce(pushDirection * knockbackForEnemy * enemy.localScale.x, ForceMode2D.Impulse);*/
         LifeLogic();
     }
 }
