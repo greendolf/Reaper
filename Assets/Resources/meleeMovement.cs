@@ -96,6 +96,10 @@ public class meleeMovement : MonoBehaviour
 
     void Angry()
     {
+        if (transform.position.x - player.position.x > 0)
+            movingRight = false;
+        else
+            movingRight = true;
         transform.position = Vector2.MoveTowards(transform.position, player.position, angrySpeed * Time.deltaTime);
     }
 

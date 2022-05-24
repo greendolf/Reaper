@@ -6,7 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public int hp = 30;
     public int damage = 10;
-    public Player player;
+
+    public int countOfSouls = 2;
 
     public int minimumCount = 3;
     public int maximumCount = 5;
@@ -20,6 +21,8 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     public float knockback = 20F;
     public float knockbackForEnemy = 10F;
+
+    Player player;
 
     private Transform enemy;
 
@@ -45,6 +48,7 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
             Spawn();
+            player.AddSouls(countOfSouls);
         }
     }
     private void Update()
@@ -84,4 +88,5 @@ public class Enemy : MonoBehaviour
         rb.AddForce(pushDirection * knockbackForEnemy * enemy.localScale.x, ForceMode2D.Impulse);*/
         LifeLogic();
     }
+
 }

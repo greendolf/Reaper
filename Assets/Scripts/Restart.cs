@@ -8,6 +8,7 @@ public class Restart : MonoBehaviour
     public void ReStart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
+        Time.timeScale = 1f;
     }
 
     public void MainMenu()

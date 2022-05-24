@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     private int souls;
     public Text soulsDisplay;
 
+    public GameObject deathScreen;
+
     //GameObject deathScreen = GameObject.Find("DeathMenu");
     public void AddCoins(int count)
     {
@@ -48,6 +50,9 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        Time.timeScale = 1f;
+        Load();
+        deathScreen.gameObject.SetActive(false); 
         hp = hpValue;
         extJumps = extJumpsValue;
         rb = GetComponent<Rigidbody2D>();
@@ -71,9 +76,9 @@ public class Player : MonoBehaviour
         //deathScreen.SetActive(false);
         if (hp <= 0)
         {
-            Transform deathScreen = GameObject.Find("GameOver").GetComponent<Transform>();
+            Save();
             deathScreen.gameObject.SetActive(true);
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
         }
     }
     private void MovementLogic()
@@ -157,5 +162,21 @@ public class Player : MonoBehaviour
         pushDirection = new Vector3(pushDirection.x, 10f, 0f);
         // Толкаем объект в нужном направлении с силой knockback
         rb.AddForce(pushDirection * knockback * enemy.localScale.x, ForceMode2D.Impulse);*/
+    }
+
+    public void Save()
+    {
+        PlayerPrefs.SetInt("souls", souls);
+    }
+
+    public void Load()
+    {
+        if(PlayerPrefs.HasKey("souls"))
+            souls = PlayerPrefs.GetInt("souls");
+        else
+        {
+            print("Save data doesn't exist");
+            souls = 0;
+        }
     }
 }
