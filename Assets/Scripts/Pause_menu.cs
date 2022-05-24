@@ -10,8 +10,10 @@ public class Pause_menu : MonoBehaviour
 
     public GameObject pauseMenuUI;
 
+    private Player player;
     private void Start()
     {
+        player = GameObject.Find("player").GetComponent<Player>();
         pauseMenuUI.SetActive(false);
     }
 
@@ -47,14 +49,16 @@ public class Pause_menu : MonoBehaviour
 
     public void LoadMenu()
     {
-        Debug.Log("Load");
+        Debug.Log("Menu");
         Time.timeScale = 1f;
+        player.Save();
         SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()
     {
         Debug.Log("Quit");
+        player.Save();
         Application.Quit();
     }
 
