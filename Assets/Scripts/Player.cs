@@ -33,9 +33,17 @@ public class Player : MonoBehaviour
     private int coins;
     public Text coinsDisplay;
 
+    private int souls;
+    public Text soulsDisplay;
+
     public void AddCoins(int count)
     {
         coins += count;
+    }
+
+    public void AddSouls(int count)
+    {
+        souls += count;
     }
     void Start()
     {
@@ -47,6 +55,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         hpDisplay.text = hp.ToString();
+        soulsDisplay.text = souls.ToString();
         hpSl.value = (float)hp / hpValue * hpSl.maxValue;
         coinsDisplay.text = coins.ToString();
         LifeLogic();
