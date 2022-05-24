@@ -6,14 +6,13 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
 
-    // Update File title
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
     public KeyCode jump = KeyCode.Space;
 
 
     public float speed = 15;
-    public float jumpForce = 25;
+    public float jumpForce = 35;
     private int extJumps;
     public int extJumpsValue = 1;
 
@@ -27,8 +26,9 @@ public class Player : MonoBehaviour
     public LayerMask whatIsGround;
 
     public int hpValue = 100;
-    public int hp;
+    private int hp;
     public Text hpDisplay;
+    public Slider hpSl;
 
     public int coins;
     public Text coinsDisplay;
@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         hpDisplay.text = hp.ToString();
+        hpSl.value = (float)hp / hpValue * hpSl.maxValue;
         coinsDisplay.text = coins.ToString();
         LifeLogic();
         MovementLogic();
