@@ -15,8 +15,16 @@ public class Enemy : MonoBehaviour
     private float rangeOfSpawn;
     public float rangeSpread = 2;
 
-    private float timeBtfAttack;
-    public float startTimeBtfAttack;
+    public float timeBtfAttack = 1f;
+    public float startTimeBtfAttack = 1f;
+    private Rigidbody2D rb;
+    public float knockback = 20F;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     public void Spawn()
     {
         int count = Random.Range(minimumCount, maximumCount);
@@ -41,22 +49,25 @@ public class Enemy : MonoBehaviour
         LifeLogic();
     }
 
+    /*private void FixedUpdate()
+    {
+        timeBtfAttack -= Time.fixedDeltaTime;
+    }*/
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (timeBtfAttack <= 0)
-        {
-                GameObject obj = collision.gameObject;
-                if (obj.CompareTag("Player"))
-                {
-                    print("HAHA");
-                    player.GetDamage(damage);
-                }
-                timeBtfAttack = startTimeBtfAttack;
-           }
-            else
-            {
-                timeBtfAttack -= Time.deltaTime;
-            }
+          GameObject obj = collision.gameObject;
+          if (obj.CompareTag("Player") && timeBtfAttack <= 0)
+          {
+                    player = collision.GetComponent<Player>();
+                    player.GetDamage(damage, transform, knockback);
+               //playerRB.AddForce(transform.right * knockback * -transform.localScale.x, ForceMode2D.Impulse);
+               timeBtfAttack = startTimeBtfAttack;
+          }
+          else
+          {
+            timeBtfAttack -= Time.deltaTime;
+          }
     }
 
     public void GetDamage(int value)
