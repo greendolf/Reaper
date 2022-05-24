@@ -30,8 +30,9 @@ public class Player : MonoBehaviour
     public Text hpDisplay;
     public Slider hpSl;
 
-    public int coins;
+    private int coins;
     public Text coinsDisplay;
+
     public void AddCoins(int count)
     {
         coins += count;
@@ -113,8 +114,11 @@ public class Player : MonoBehaviour
     {
         facingRight = !facingRight;
         Vector2 Scaler = transform.localScale;
+        Vector2 Scaler2 = transform.GetChild(0).localScale;
         Scaler.x *= -1;
+        Scaler2.x *= -1;
         transform.localScale = Scaler;
+        transform.GetChild(0).localScale = Scaler2;
     }
 //**************************************************************************************************
 
