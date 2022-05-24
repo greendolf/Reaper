@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
         //rb.AddForce(direction * knockback /** -transform.localScale.x*/, ForceMode2D.Impulse);
         Vector3 pushFrom = enemy.position;
         Vector3 pushDirection = (pushFrom - transform.position).normalized;
-        pushDirection = new Vector3(pushDirection.x, 0f, 0f);
+        pushDirection = new Vector3(pushDirection.x, 10f, 0f);
         // Толкаем объект в нужном направлении с силой knockback
         rb.AddForce(pushDirection * knockback * enemy.localScale.x, ForceMode2D.Impulse);
     }

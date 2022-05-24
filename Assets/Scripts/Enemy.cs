@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
     public float startTimeBtfAttack = 1f;
     private Rigidbody2D rb;
     public float knockback = 20F;
+    public float knockbackForEnemy = 10F;
+
+    private Transform enemy;
 
     private void Start()
     {
@@ -46,7 +49,7 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
-        LifeLogic();
+        //LifeLogic();
     }
 
     /*private void FixedUpdate()
@@ -59,8 +62,9 @@ public class Enemy : MonoBehaviour
           GameObject obj = collision.gameObject;
           if (obj.CompareTag("Player") && timeBtfAttack <= 0)
           {
-                    player = collision.GetComponent<Player>();
-                    player.GetDamage(damage, transform, knockback);
+               player = collision.GetComponent<Player>();
+               enemy = collision.GetComponent<Transform>();
+               player.GetDamage(damage, transform, knockback);
                //playerRB.AddForce(transform.right * knockback * -transform.localScale.x, ForceMode2D.Impulse);
                timeBtfAttack = startTimeBtfAttack;
           }
@@ -73,5 +77,11 @@ public class Enemy : MonoBehaviour
     public void GetDamage(int value)
     {
         hp -= value;
+        Vector3 pushFrom = enemy.position;
+        Vector3 pushDirection = (pushFrom - transform.position).normalized;
+        pushDirection = new Vector3(pushDirection.x, 0f, 0f);
+        // Толкаем объект в нужном направлении с силой knockback
+        rb.AddForce(pushDirection * knockbackForEnemy * enemy.localScale.x, ForceMode2D.Impulse);
+        LifeLogic();
     }
 }
