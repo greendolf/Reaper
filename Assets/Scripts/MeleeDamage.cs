@@ -13,7 +13,7 @@ public class MeleeDamage : MonoBehaviour
         if (obj.CompareTag("Player"))
         {
             print("HAHA");
-            collision.GetComponent<Player>().GetDamage(damage);
+            //collision.GetComponent<Player>().GetDamage(damage, transform);
         }
     }
 }
