@@ -76,9 +76,8 @@ public class Player : MonoBehaviour
         //deathScreen.SetActive(false);
         if (hp <= 0)
         {
-            Save();
             deathScreen.gameObject.SetActive(true);
-            //Time.timeScale = 0f;
+            Time.timeScale = 0f;
         }
     }
     private void MovementLogic()
