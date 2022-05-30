@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
     public KeyCode jump = KeyCode.Space;
+    public KeyCode interact = KeyCode.E;
 
 
     public float speed = 15;
@@ -30,7 +31,7 @@ public class Player : MonoBehaviour
     public Text hpDisplay;
     public Slider hpSl;
 
-    private int coins;
+    public int coins;
     public Text coinsDisplay;
 
     private int souls;
@@ -38,6 +39,10 @@ public class Player : MonoBehaviour
 
     public GameObject deathScreen;
 
+    public float marketRange;
+    private bool isMarket = false;
+    public GameObject marketUI;
+    public Transform marketPos;
     //GameObject deathScreen = GameObject.Find("DeathMenu");
     public void AddCoins(int count)
     {
@@ -67,9 +72,30 @@ public class Player : MonoBehaviour
         LifeLogic();
         MovementLogic();
         JumpLogic();
+        MarketLogic();
     }
 
     //**************************************************************************************************
+
+    private void MarketLogic()
+    {
+        if (Input.GetKeyDown(interact))
+        {
+            float diff = Vector3.Distance(transform.position, marketPos.position);
+            if (!isMarket && diff < marketRange )
+            {
+                marketUI.SetActive(true);
+                Time.timeScale = 0f;
+                isMarket = true;
+            }
+            else
+            {
+                marketUI.SetActive(false);
+                Time.timeScale = 1f;
+                isMarket = false;
+            }
+        }
+    }
 
     private void LifeLogic()
     {
@@ -166,6 +192,7 @@ public class Player : MonoBehaviour
     public void Save()
     {
         PlayerPrefs.SetInt("souls", souls);
+        PlayerPrefs.SetInt("hp", hpValue);
     }
 
     public void Load()
@@ -176,6 +203,13 @@ public class Player : MonoBehaviour
         {
             print("Save data doesn't exist");
             souls = 0;
+        }
+        if (PlayerPrefs.HasKey("hp"))
+            souls = PlayerPrefs.GetInt("hp");
+        else
+        {
+            print("Save data doesn't exist");
+            hp = 0;
         }
     }
 }
