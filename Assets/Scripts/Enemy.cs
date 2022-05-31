@@ -22,12 +22,13 @@ public class Enemy : MonoBehaviour
     public float knockback = 20F;
     public float knockbackForEnemy = 10F;
 
-    Player player;
+    private Player player;
 
     private Transform enemy;
 
     private void Start()
     {
+        player = GameObject.Find("player").GetComponent<Player>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -66,8 +67,8 @@ public class Enemy : MonoBehaviour
           GameObject obj = collision.gameObject;
           if (obj.CompareTag("Player") && timeBtfAttack <= 0)
           {
-               player = collision.GetComponent<Player>();
-               enemy = collision.GetComponent<Transform>();
+               //player = collision.GetComponent<Player>();
+               //enemy = collision.GetComponent<Transform>();
                player.GetDamage(damage, transform, knockback);
                //playerRB.AddForce(transform.right * knockback * -transform.localScale.x, ForceMode2D.Impulse);
                timeBtfAttack = startTimeBtfAttack;

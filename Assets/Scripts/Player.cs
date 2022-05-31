@@ -39,8 +39,8 @@ public class Player : MonoBehaviour
 
     public GameObject deathScreen;
 
-    public float marketRange;
-    private bool isMarket = false;
+    public float marketRange = 3.5f;
+    public bool isMarket = false;
     public GameObject marketUI;
     public Transform marketPos;
     //GameObject deathScreen = GameObject.Find("DeathMenu");
